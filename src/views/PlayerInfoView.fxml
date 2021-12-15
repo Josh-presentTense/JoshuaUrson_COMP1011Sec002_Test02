@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerInfoController">
+   <children>
+      <HBox layoutX="14.0" layoutY="14.0" spacing="15.0">
+         <children>
+            <TableView fx:id="playersTableView" prefHeight="250.0" prefWidth="350.0">
+              <columns>
+                <TableColumn fx:id="playerIdColumn" prefWidth="57.0" text="PlayerID" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="98.0" text="FirstName" />
+                  <TableColumn fx:id="lastNameColumn" prefWidth="94.0" text="LastName" />
+                  <TableColumn fx:id="battingAvgColumn" prefWidth="96.0" text="BattingAverage" />
+              </columns>
+            </TableView>
+            <VBox spacing="30.0">
+               <children>
+                  <VBox spacing="5.0">
+                     <children>
+                        <TextArea fx:id="battingAvgTextArea" editable="false" prefHeight="100.0" prefWidth="190.0" wrapText="true" />
+                        <Button mnemonicParsing="false" prefWidth="190.0" text="Display Battling Score" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="5.0">
+                     <children>
+                        <TextArea fx:id="battingScoreTextArea" editable="false" prefHeight="100.0" prefWidth="190.0" wrapText="true" />
+                        <Button mnemonicParsing="false" prefWidth="190.0" text="Highest Battling Score" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox layoutX="586.0" layoutY="14.0" spacing="5.0">
+         <children>
+            <TextArea fx:id="allBattingAverageTextArea" editable="false" prefHeight="320.0" prefWidth="200.0" wrapText="true" />
+            <Button mnemonicParsing="false" prefWidth="200.0" text="All Players Battling Average" />
+         </children>
+      </VBox>
+      <HBox layoutX="14.0" layoutY="317.0" spacing="10.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="Search By First Name:">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label text="Search By Player ID:">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <TextField fx:id="firstNameTextField" />
+                  <TextField fx:id="playerIdTextField" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Display ALL" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Search" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="426.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="100.0" text="Clear Search" />
+   </children>
+</AnchorPane>
