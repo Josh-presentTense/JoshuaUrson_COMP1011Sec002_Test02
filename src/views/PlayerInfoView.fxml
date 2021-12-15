@@ -28,13 +28,13 @@
                   <VBox spacing="5.0">
                      <children>
                         <TextArea fx:id="battingAvgTextArea" editable="false" prefHeight="100.0" prefWidth="190.0" wrapText="true" />
-                        <Button mnemonicParsing="false" prefWidth="190.0" text="Display Battling Average" />
+                        <Button mnemonicParsing="false" onAction="#displayBattingAverageButton" prefWidth="190.0" text="Display Battling Average" />
                      </children>
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
                         <TextArea fx:id="battingScoreTextArea" editable="false" prefHeight="100.0" prefWidth="190.0" wrapText="true" />
-                        <Button mnemonicParsing="false" prefWidth="190.0" text="Highest Battling Score" />
+                        <Button mnemonicParsing="false" onAction="#highestBattingScoreButton" prefWidth="190.0" text="Highest Battling Score" />
                      </children>
                   </VBox>
                </children>
@@ -44,7 +44,7 @@
       <VBox layoutX="586.0" layoutY="14.0" spacing="5.0">
          <children>
             <TextArea fx:id="allBattingAverageTextArea" editable="false" prefHeight="320.0" prefWidth="200.0" wrapText="true" />
-            <Button mnemonicParsing="false" prefWidth="200.0" text="All Players Battling Average" />
+            <Button mnemonicParsing="false" onAction="#allPlayersBattingAverageButton" prefWidth="200.0" text="All Players Battling Average" />
          </children>
       </VBox>
       <HBox layoutX="14.0" layoutY="317.0" spacing="10.0">

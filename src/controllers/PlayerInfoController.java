@@ -59,6 +59,14 @@ public class PlayerInfoController implements Initializable {
 
     }
 
+    /**
+     * This method pulls data from the DB based on the Search By text field
+     * If the Search By First Name field is filled, search the table for players with that name
+     * If the Search By PlayerID field is filled, search the table for the player with either playerID
+     * If both fields are filled. Search by top-dowm, seach by First Name
+     * If NO fields are filled, output error msg
+     * @throws SQLException
+     */
     @FXML
     private void searchButton() throws SQLException {
         clearTableViewResults();
@@ -74,7 +82,7 @@ public class PlayerInfoController implements Initializable {
             parameter = firstNameTextField.getText();
         } else if (!playerIdTextField.getText().isBlank()) {
             searchBy = "playerID";
-            parameter = playerIdTextField.getText().toString();
+            parameter = playerIdTextField.getText();
         } else {
             // Show error message
             errMsgLabel.setVisible(true);
@@ -87,6 +95,10 @@ public class PlayerInfoController implements Initializable {
         playersTableView.setItems(baseballPlayers);
     }
 
+    /**
+     * This method displays all the player info from the DB onto the TableView
+     * @throws SQLException
+     */
     @FXML
     private void displayAllButton() throws SQLException {
         clearTableViewResults();
@@ -119,5 +131,88 @@ public class PlayerInfoController implements Initializable {
         battingScoreTextArea.setText("");
         battingAvgTextArea.setText("");
         allBattingAverageTextArea.setText("");
+    }
+
+    /**
+     * This method displays the total batting average of all the players in the appropriate text area
+     * @throws SQLException
+     */
+    @FXML
+    private void displayBattingAverageButton() throws SQLException {
+        // Get all baseball players from DB
+        ArrayList<Player> listOfPlayers = DBConn.getPlayersFromDB();
+
+        // Stores data used to get batting average of all players
+        int playerCount = 0;
+        double sumOfAverages = 0;
+        double battingAverageOfAllPlayers = 0;
+
+        // parse through the arraylist of players and get the batting average of the players
+        for (Player p : listOfPlayers) {
+            playerCount += 1;
+            sumOfAverages += p.getBattingAverage();
+        }
+
+        // Calculate the batting average of all players
+        battingAverageOfAllPlayers = sumOfAverages / playerCount;
+
+        // Display info on the appropriate text area
+        String displayText = "Batting average of all players\n";
+        displayText += String.format("Batting Average = %.3f", battingAverageOfAllPlayers);
+        battingAvgTextArea.setText(displayText);
+    }
+
+    /**
+     * This method displays the player with the highest batting average in the appropriate text area
+     * @throws SQLException
+     */
+    @FXML
+    private void highestBattingScoreButton() throws SQLException {
+        // Get all baseball players from DB
+        ArrayList<Player> listOfPlayers = DBConn.getPlayersFromDB();
+
+        // used to find the highest batting average and to store player first and last name
+        String playerFName = "";
+        String playerLName = "";
+        double highestBattingAvg = 0;
+
+        // parse through the arraylist of players and get the batting average of the players
+        for (Player p : listOfPlayers) {
+            if (highestBattingAvg == 0)
+                highestBattingAvg = p.getBattingAverage();
+
+            if (highestBattingAvg < p.getBattingAverage()) {
+                highestBattingAvg = p.getBattingAverage();
+                playerFName = p.getFirstName();
+                playerLName = p.getLastName();
+            }
+        }
+
+        // Display info on the appropriate text area
+        String displayText = "Player with Highest Batting Average is:\n";
+        displayText += String.format("Player Name: %s %s\n", playerFName, playerLName);
+        displayText += String.format("Batting Average = %.3f", highestBattingAvg);
+        battingScoreTextArea.setText(displayText);
+    }
+
+    /**
+     * This method displays the full name and batting average for ALL players in the text field
+     * @throws SQLException
+     */
+    @FXML
+    private void allPlayersBattingAverageButton() throws SQLException {
+        // Get all baseball players from DB
+        ArrayList<Player> listOfPlayers = DBConn.getPlayersFromDB();
+
+        // Holds the string that will be used for the text area
+        String displayText = "List of all Players and Batting Average\n";
+
+        for (Player p : listOfPlayers) {
+            displayText += String.format("Player Name: \n\t\t%s %s\n", p.getFirstName(), p.getLastName());
+            displayText += String.format("Batting Average: \n\t\t%.3f\n\n", p.getBattingAverage());
+        }
+
+        // Display text
+        allBattingAverageTextArea.setText(displayText);
     }
 }
